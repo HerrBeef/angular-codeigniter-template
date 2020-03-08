@@ -1,0 +1,29 @@
+<div class="login-container">
+  <form class="form-login" (ngSubmit)="login()">
+    <ul class="login-nav">
+      <li class="login-nav__item active">
+        <a href="#">Sign In</a>
+      </li>
+      <li class="login-nav__item">
+        <a href="#">Sign Up</a>
+      </li>
+    </ul>
+    <label for="login-input-user" class="login__label">
+      Username
+    </label>
+    <input id="login-input-user" formControlName="username" name="username" class="login__input" type="text" required />
+    <label for="login-input-password" class="login__label">
+      Password
+    </label>
+    <input id="login-input-password" formControlName="password" name="password" class="login__input" type="password" required />
+    <label for="login-sign-up" class="login__label--checkbox">
+      <input id="login-sign-up" type="checkbox" formControlName="rememberme" class="login__input--checkbox" />
+      Keep me Signed in
+    </label>
+    <input type="submit" value="Sign in" class="login__submit">
+  </form>
+  <a href="#" class="login__forgot">Forgot Password?</a>
+</div>
+<button (click)="authentificationService.login('admin@flootly.com', 'test1234', false)">Login</button>
+<button (click)="authentificationService.checklogin()">Check Login</button>
+<p>{{authentificationService.loggedin}}</p>

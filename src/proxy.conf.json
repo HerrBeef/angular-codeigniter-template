@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "http://localhost:23999/testapi/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
