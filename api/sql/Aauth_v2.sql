@@ -176,3 +176,13 @@ CREATE TABLE IF NOT EXISTS `aauth_login_attempts` (
 -- ----------------------------
 -- Records of aauth_login_attempts
 -- ----------------------------
+
+CREATE TABLE IF NOT EXISTS `movies` ( `id` INT NOT NULL , `name` VARCHAR(255) NOT NULL , `description` TEXT NOT NULL , `releasedate` DATE NOT NULL ) ENGINE = InnoDB; 
+
+ALTER TABLE `movies` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`); 
+
+INSERT INTO `aauth_perms` (`id`, `name`, `definition`) VALUES
+(1, 'getuserlist', NULL),
+(2, 'getuser', NULL),
+(3, 'getmovielist', NULL),
+(4, 'getmovie', NULL);

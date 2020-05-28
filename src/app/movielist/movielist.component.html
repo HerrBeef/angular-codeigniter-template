@@ -1,0 +1,35 @@
+<mat-card  *ngIf="error === ''">
+  <mat-card-title>Movies</mat-card-title>
+<div>
+  <mat-form-field>
+    <mat-label>Suche</mat-label>
+    <input matInput [(ngModel)]="query" (keyup)="filter()">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Datum</mat-label>
+    <input matInput [(ngModel)]="datequery" ngbDatepicker #d="ngbDatepicker" (click)="d.open()" (keyup)="filter()" (dateSelect)="filter()" />
+  </mat-form-field>
+  <button mat-raised-button (click)="filter()" color="primary">Filter</button>
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+    <th scope="col">Releasedate</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let movie of filteredMovies">
+    <th scope="row">{{ movie.id }}</th>
+    <td>{{ movie.name }}</td>
+    <td>{{ movie.description }}</td>
+    <td>{{ movie.releasedate }}</td>
+  </tr>
+  </tbody>
+</table>
+</mat-card>
+<mat-card *ngIf="error !== ''">
+  <mat-card-title>{{error}}</mat-card-title>
+</mat-card>

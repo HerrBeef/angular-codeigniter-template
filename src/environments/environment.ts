@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiurl: "http://localhost:9999/testapi/api/"
+  apiurl: "http://localhost/angular-codeigniter-template/api/"
 };
 
 /*

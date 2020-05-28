@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpRequest } from '@angular/common/http';
-
-const API_URL: string = "http://localhost:4200/api/";
+import { HttpClient } from '@angular/common/http';
+import { Permission } from '../models/permission.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +8,38 @@ const API_URL: string = "http://localhost:4200/api/";
 export class AuthentificationService {
 
   public loggedin: boolean = false;
+  public permissions: Permission[] = [];
 
   constructor(private http: HttpClient) {
     this.checklogin();
   }
 
   checklogin() {
-    this.http.request(new HttpRequest("GET", API_URL + 'welcome/checkloggedin', {withCredentials: true})).subscribe(data => this.loggedin = (data as any).success);
+    this.http.get('/api/authentification/checkloggedin', {withCredentials: true}).subscribe(data => {
+      this.loggedin = (data as any).success;
+      if(this.loggedin) {
+        this.getpermissions();
+      }
+    });
   }
 
-  login(email: string, password: string, rememberme: boolean){
-    this.http.request(new HttpRequest("POST", API_URL + 'welcome/login', { username: email, password: password, remember: rememberme }, {withCredentials: true})).subscribe(data => this.loggedin = (data as any).success);
+  login(email: string, password: string) {
+    this.http.post('/api/authentification/login', { username: email, password: password }, { withCredentials: true }).subscribe(data => {
+      this.loggedin = (data as any).success
+      this.permissions = (data as any).permissions;
+    });
+  }
+
+  logout() {
+    this.http.get('/api/authentification/logout', { withCredentials: true }).subscribe(data => {
+      this.loggedin = false
+      this.permissions = [];
+    });
+  }
+
+  getpermissions() {
+    this.http.post('/api/authentification/getpermissions', { withCredentials: true }).subscribe(data => {
+      this.permissions = (data as any).permissions;
+    });
   }
 }

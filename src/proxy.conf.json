@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "http://localhost:23999/testapi/",
+        "target": "http://localhost/angular-codeigniter-template/",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

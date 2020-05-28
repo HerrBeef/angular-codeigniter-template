@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthentificationService } from './authentification.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-authentification',
@@ -9,10 +9,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AuthentificationComponent implements OnInit {
   constructor(public authentificationService: AuthentificationService) {
-
   }
 
-  public login(){
+  public login(authForm: NgForm){
+    if(authForm.valid){
+      this.authentificationService.login(authForm.value.username, authForm.value.password);
+    }
   }
 
   ngOnInit() {
