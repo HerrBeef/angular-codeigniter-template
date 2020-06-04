@@ -1,23 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Movie_model extends CI_Model
+class Example_model extends CI_Model
 {
     public function __construct()
     {
         $this->load->database();
     }
 
-    public function getmovies($movieId = false, $movieName = false)
+    public function getexamples($id = false, $name = false)
     {
         $this->db->select('*');
-        $this->db->from('movies');
+        $this->db->from('examples');
 
-        if($movieId != false) 
+        if($id != false) 
         {
             $this->db->where('id', $featureId);
         }
-        if($movieName != false)
+        if($name != false)
         {
             $this->db->where('name', $featurename);
         }
@@ -28,24 +28,23 @@ class Movie_model extends CI_Model
 
         if(!isset($result))
         {
-            log_message('error', "Database error for getting movies");
+            log_message('error', "Database error for getting examples");
         }
         return $result;
     }
 
-    public function createmovie($name, $description, $releasedate)
+    public function createexample($name, $description)
     {
-		if(empty($name) || empty($releasedate)) {
+		if(empty($name)) {
             return false;
 		}
 		
-        $movie = array(
+        $example = array(
             'name' => $name,
-            'description' => $description,
-            'releasedate' => $releasedate
+            'description' => $description
         );
 
-        if(!$this->db->insert('movies', $movie)) {
+        if(!$this->db->insert('examples', $example)) {
             log_message('error', 'Insert Error');
             return false;
         }

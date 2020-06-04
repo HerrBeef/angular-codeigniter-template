@@ -3,9 +3,8 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AuthentificationComponent } from "./authentification/authentification.component";
+import { AuthentificationComponent } from "./components/authentification/authentification.component";
 import { FormsModule } from "@angular/forms";
-import { UserlistComponent } from "./userlist/userlist.component";
 import { SearchPipe } from "./pipes/search.pipe";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatInputModule } from "@angular/material/input";
@@ -16,8 +15,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
-import { MovielistComponent } from "./movielist/movielist.component";
-import { CreateMovieComponent } from "./createmovie/create-movie.component";
+import { ExamplelistComponent } from "./components/examplelist/examplelist.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ToastrModule } from 'ngx-toastr';
@@ -27,10 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     AuthentificationComponent,
-    UserlistComponent,
     SearchPipe,
-    MovielistComponent,
-    CreateMovieComponent,
+    ExamplelistComponent
   ],
   imports: [
     BrowserModule,

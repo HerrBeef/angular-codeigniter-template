@@ -177,12 +177,15 @@ CREATE TABLE IF NOT EXISTS `aauth_login_attempts` (
 -- Records of aauth_login_attempts
 -- ----------------------------
 
-CREATE TABLE IF NOT EXISTS `movies` ( `id` INT NOT NULL , `name` VARCHAR(255) NOT NULL , `description` TEXT NOT NULL , `releasedate` DATE NOT NULL ) ENGINE = InnoDB; 
+CREATE TABLE IF NOT EXISTS `examples` ( `id` INT NOT NULL , `name` VARCHAR(255) NOT NULL , `description` TEXT NOT NULL ) ENGINE = InnoDB; 
 
-ALTER TABLE `movies` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`); 
+ALTER TABLE `examples` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`); 
 
 INSERT INTO `aauth_perms` (`id`, `name`, `definition`) VALUES
-(1, 'getuserlist', NULL),
-(2, 'getuser', NULL),
-(3, 'getmovielist', NULL),
-(4, 'getmovie', NULL);
+(1, 'getexamplelist', NULL),
+(2, 'getexample', NULL);
+
+INSERT INTO `aauth_perm_to_group` (`perm_id`, `group_id`) VALUES ('1', '3'), ('2', '3');
+
+INSERT INTO `examples` (`id`, `name`, `description`) VALUES (NULL, 'Example 1', 'Enim sed autem et et vitae quia. Fuga ut placeat vel libero est. Hic sed rem ut ipsum aut sunt. Ut aut eos expedita sed et eius dolore ad.\r\n\r\nNihil eos aspernatur quo veniam dolor. Voluptates excepturi doloremque laborum reiciendis. Fugit veritatis magnam voluptatem accusamus sunt asperiores in. Qui quae et voluptatem mollitia et quisquam porro.'), (NULL, 'Example 2', 'Cum voluptas consequatur dolorem minima et veritatis. Consequatur illum voluptas reprehenderit est tenetur doloremque. Nesciunt explicabo eaque a cum ut non porro. Fugiat culpa dignissimos a ea.')
+

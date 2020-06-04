@@ -1,28 +1,28 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Movies extends CI_Controller {
+class Example extends CI_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->library(array('Aauth','session','form_validation'));
-		$this->load->model(array('movie_model'));
+		$this->load->model(array('example_model'));
 		$this->load->helper(array('form', 'url', 'date'));
 	}
 
-	public function get($movieid = false, $moviename = false)
+	public function get($id = false, $name = false)
 	{
-		if(($movieid != false || $moviename != false) && $this->aauth->is_allowed('getmovie')) {
-			if(isset($this->movie_model->getmovies($movieid, $moviename)[0])){
-				echo json_encode(array('success' => true, 'movie' => $this->movie_model->getmovies($movieid, $moviename)[0]));
+		if(($id != false || $name != false) && $this->aauth->is_allowed('getexample')) {
+			if(isset($this->movie_model->getexamples($id, $name)[0])){
+				echo json_encode(array('success' => true, 'example' => $this->example_model->getexample($id, $name)[0]));
 			}
 			else {
 				echo json_encode(array('success' => false, 'error' => "Kein Film gefunden der den Kriterien entspricht"));
 			}
 		}
-		else if($this->aauth->is_allowed('getmovielist')) {
-			$movies = $this->movie_model->getmovies();
+		else if($this->aauth->is_allowed('getexamplelist')) {
+			$examples = $this->example_model->getexamples();
 
-			echo json_encode(array('success' => true, 'movies' => $movies));
+			echo json_encode(array('success' => true, 'examples' => $examples));
 		}
 		else {
 			echo json_encode(array('success' => false, 'error' => "Keine Berechtigung"));
@@ -35,11 +35,10 @@ class Movies extends CI_Controller {
 		
 		$name = isset($parameters->name) && !empty($parameters->name)? $parameters->name : '';
 		$description = isset($parameters->description)? $parameters->description : '';
-		$releasedate = isset($parameters->releasedate)? $parameters->releasedate : '';
 
-		if($this->aauth->is_allowed('createmovie')) {
-			if($this->movie_model->createmovie($name, $description, $releasedate)) {
-				echo json_encode(array('success' => true, 'message' => "Movie successfully created"));
+		if($this->aauth->is_allowed('createexample')) {
+			if($this->example_model->createexample($name, $description)) {
+				echo json_encode(array('success' => true, 'message' => "Example successfully created"));
 			}
 			else {
 				echo json_encode(array('success' => false, 'error' => "Fehler beim Anlegen"));

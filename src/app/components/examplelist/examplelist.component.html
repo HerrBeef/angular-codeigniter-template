@@ -1,0 +1,28 @@
+<mat-card  *ngIf="error === ''">
+  <mat-card-title>Examples</mat-card-title>
+<div>
+  <mat-form-field>
+    <mat-label>Suche</mat-label>
+    <input matInput [(ngModel)]="query">
+  </mat-form-field>
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let example of examples | search:'name,description':query ">
+    <th scope="row">{{ example.id }}</th>
+    <td>{{ example.name }}</td>
+    <td [innerHTML]="example.description.replace('\r\n', '<br>')"></td>
+  </tr>
+  </tbody>
+</table>
+</mat-card>
+<mat-card *ngIf="error !== ''">
+  <mat-card-title>{{error}}</mat-card-title>
+</mat-card>

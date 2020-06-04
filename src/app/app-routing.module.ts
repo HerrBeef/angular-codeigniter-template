@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthentificationComponent } from './authentification/authentification.component';
-import { UserlistComponent } from './userlist/userlist.component';
-import { MovielistComponent } from './movielist/movielist.component';
-import { CreateMovieComponent } from './createmovie/create-movie.component';
+import { AuthentificationComponent } from './components/authentification/authentification.component';
+import { ExamplelistComponent } from './components/examplelist/examplelist.component';
 
 
 const routes: Routes = [
@@ -11,13 +9,7 @@ const routes: Routes = [
     path: 'authentification', component: AuthentificationComponent
   },
   {
-    path: 'users', component: UserlistComponent
-  },
-  {
-    path: 'movies', component: MovielistComponent,
-  },
-  {
-    path: 'createmovie', component: CreateMovieComponent
+    path: 'examples', component: ExamplelistComponent,
   }
 ];
 
