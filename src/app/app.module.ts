@@ -16,7 +16,12 @@ import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
-import { MovielistComponent } from './movielist/movielist.component';
+import { MovielistComponent } from "./movielist/movielist.component";
+import { CreateMovieComponent } from "./createmovie/create-movie.component";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +29,8 @@ import { MovielistComponent } from './movielist/movielist.component';
     AuthentificationComponent,
     UserlistComponent,
     SearchPipe,
-    MovielistComponent
+    MovielistComponent,
+    CreateMovieComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +46,13 @@ import { MovielistComponent } from './movielist/movielist.component';
     MatButtonModule,
     NgbDatepickerModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

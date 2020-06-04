@@ -28,4 +28,25 @@ class Movies extends CI_Controller {
 			echo json_encode(array('success' => false, 'error' => "Keine Berechtigung"));
 		}
 	}
+
+	public function create()
+	{
+		$parameters = json_decode($this->input->raw_input_stream);
+		
+		$name = isset($parameters->name) && !empty($parameters->name)? $parameters->name : '';
+		$description = isset($parameters->description)? $parameters->description : '';
+		$releasedate = isset($parameters->releasedate)? $parameters->releasedate : '';
+
+		if($this->aauth->is_allowed('createmovie')) {
+			if($this->movie_model->createmovie($name, $description, $releasedate)) {
+				echo json_encode(array('success' => true, 'message' => "Movie successfully created"));
+			}
+			else {
+				echo json_encode(array('success' => false, 'error' => "Fehler beim Anlegen"));
+			}
+		}
+		else {
+			echo json_encode(array('success' => false, 'error' => "Keine Berechtigung"));
+		}
+	}
 }

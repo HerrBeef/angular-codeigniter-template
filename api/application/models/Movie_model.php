@@ -33,43 +33,22 @@ class Movie_model extends CI_Model
         return $result;
     }
 
-    public function savesetting($datakey, $value = false, $configureable = null)
+    public function createmovie($name, $description, $releasedate)
     {
-        if($datakey == "") {
+		if(empty($name) || empty($releasedate)) {
+            return false;
+		}
+		
+        $movie = array(
+            'name' => $name,
+            'description' => $description,
+            'releasedate' => $releasedate
+        );
+
+        if(!$this->db->insert('movies', $movie)) {
+            log_message('error', 'Insert Error');
             return false;
         }
-        
-        
-        $this->db->select('*');
-        $this->db->from('settings');
-        $this->db->where('datakey', $datakey);
-
-        $query=$this->db->get();
-        $result = $query->result();
-        $this->db->reset_query();
-
-        if(isset($result)) {
-            $data = array(
-                'value' => $value
-            );
-
-            if($configureable != null) {
-                $data = array(
-                    'value' => $value,
-                    'configurable' => $configureable
-                );
-            }
-            
-            $this->db->where('datakey', $datakey);
-            if(!$this->db->update('settings', $data)){
-                log_message('error', "Database error for updating existing setting");
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
-
         return true;
     }
 }

@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Movie } from '../models/movie.model';
-import { DatePipe } from '@angular/common';
-import { MovieService } from '../services/movie.service';
+import { Component, OnInit } from "@angular/core";
+import { Movie } from "../models/movie.model";
+import { DatePipe } from "@angular/common";
+import { MovieService } from "../services/movie.service";
 
 @Component({
-  selector: 'app-movielist',
-  templateUrl: './movielist.component.html',
-  styleUrls: ['./movielist.component.scss']
+  selector: "app-movielist",
+  templateUrl: "./movielist.component.html",
+  styleUrls: ["./movielist.component.scss"],
 })
 export class MovielistComponent implements OnInit {
   public filteredMovies: Movie[];
   public error: string = "";
   public query: string = "";
-  public datequery: { day: number; month: number; year: number };
+  public datequery: string = "";
   private movies: Movie[];
   private datepipe: DatePipe = new DatePipe("en");
 
@@ -32,33 +32,30 @@ export class MovielistComponent implements OnInit {
   }
 
   filter() {
-    if(this.datequery != undefined && this.datequery != null && this.datequery.day != undefined && this.datequery.month != undefined && this.datequery.year != undefined) {
-      let datequery = this.datepipe.transform(
-        this.datequery.year + "-" + this.datequery.month + "-" + this.datequery.day
-        ,"yyyy-MM-dd"
-      );
+    let fieldsToSearch = ["name", "description"];
+    this.filteredMovies = this.movies;
 
-      this.filteredMovies = this.filteredMovies.filter(
+    if ((this.datequery == null || this.datequery == "") && this.query == "") {
+      this.filteredMovies = this.movies;
+    } else if (this.datequery != null && this.datequery != "") {
+      let datequery = this.datepipe.transform(this.datequery, "yyyy-MM-dd");
+
+      this.filteredMovies = this.movies.filter(
         (item) =>
           item.releasedate !== null &&
           new RegExp(datequery, "gi").test(item.releasedate)
       );
     }
-    else if(this.query != "") {
-      let fieldsToSearch = ["name", "description"];
-      this.filteredMovies = this.movies.filter((item) =>
-        fieldsToSearch.some(
-          (key) =>
-            item.hasOwnProperty(key) &&
-            new RegExp(this.query.toLowerCase(), "gi").test(
-              item[key].toLowerCase()
-            )
-        )
-      );
-    }
-    else {
-      this.refillFilteredMovies();
-    }
+
+    this.filteredMovies = this.filteredMovies.filter((item) =>
+      fieldsToSearch.some(
+        (key) =>
+          item.hasOwnProperty(key) &&
+          new RegExp(this.query.toLowerCase(), "gi").test(
+            item[key].toLowerCase()
+          )
+      )
+    );
   }
 
   ngOnInit(): void {}

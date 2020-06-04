@@ -10,4 +10,8 @@ export class MovieService {
   getmovies() {
     return this.http.get("/api/movies/get", { withCredentials: true });
   }
+
+  createmovie(name: string, description: string, releasedate: string) {
+    return this.http.post('/api/movies/create', { name: name, description: description, releasedate: releasedate }, { withCredentials: true });
+  }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from "./user.service";
 import { User } from "../models/user.model";
 import { DatePipe } from "@angular/common";
-import { AuthentificationService } from '../authentification/authentification.service';
 
 @Component({
   selector: "app-userlist",

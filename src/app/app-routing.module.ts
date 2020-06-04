@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { MovielistComponent } from './movielist/movielist.component';
+import { CreateMovieComponent } from './createmovie/create-movie.component';
 
 
 const routes: Routes = [
@@ -13,8 +14,11 @@ const routes: Routes = [
     path: 'users', component: UserlistComponent
   },
   {
-    path: 'movies', component: MovielistComponent
+    path: 'movies', component: MovielistComponent,
   },
+  {
+    path: 'createmovie', component: CreateMovieComponent
+  }
 ];
 
 @NgModule({
