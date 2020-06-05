@@ -1,11 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { Example } from "../../models/example.model";
 import { ExampleService } from "../../services/example.service";
+import { fadeInAnimation } from 'src/app/animations/fadein.animation';
 
 @Component({
   selector: "app-examplelist",
   templateUrl: "./examplelist.component.html",
   styleUrls: ["./examplelist.component.scss"],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ExamplelistComponent implements OnInit {
 
