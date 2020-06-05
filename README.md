@@ -1,1 +1,1 @@
-# angular-codeigniter-template
+# Angular 9 and Codeigniter 3 Integration Template
