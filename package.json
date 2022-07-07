@@ -24,7 +24,7 @@
     "@angular/router": "^10.1.1",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "bootstrap": "^4.5.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "ngx-moment": "^5.0.0",
     "ngx-toastr": "^13.0.0",
     "rxjs": "^6.6.3",
